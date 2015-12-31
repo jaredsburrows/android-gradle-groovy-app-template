@@ -76,11 +76,8 @@ configure(project(':app').subprojects) {
         // Groovy
         compile 'org.codehaus.groovy:groovy:2.4.5:grooid'
 
-        // Android Support Library for AppCompat, Recylcerview
-        compile 'com.android.support:design:23.1.1'
-
-        // Android Support Library for the CardView
-        compile 'com.android.support:cardview-v7:23.1.1'
+        // Android Support Library for AppCompat
+        compile 'com.android.support:appcompat-v7:23.1.1'
 
         // Espresso Instrumentation Testing
         // androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
