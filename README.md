@@ -1,4 +1,4 @@
-AndroidGradleTemplate [![Status](https://travis-ci.org/jaredsburrows/android-gradle-groovy-template.svg?branch=master)](https://travis-ci.org/jaredsburrows/android-gradle-groovy-template) [![Coverage Status](https://coveralls.io/repos/jaredsburrows/android-gradle-groovy-template/badge.svg?branch=master)](https://coveralls.io/r/jaredsburrows/android-gradle-groovy-template?branch=master)
+android-gradle-groovy-template [![Status](https://travis-ci.org/jaredsburrows/android-gradle-groovy-template.svg?branch=master)](https://travis-ci.org/jaredsburrows/android-gradle-groovy-template) [![Coverage Status](https://coveralls.io/repos/jaredsburrows/android-gradle-groovy-template/badge.svg?branch=master)](https://coveralls.io/r/jaredsburrows/android-gradle-groovy-template?branch=master)
 =========
 Gradle + Android Studio + Robolectric + Espresso + RoboSpock + JaCoCo
 
@@ -18,7 +18,6 @@ Gradle + Android Studio + Robolectric + Espresso + RoboSpock + JaCoCo
 |---|---|
 | [Android Support-v4 ](http://developer.android.com/tools/support-library/features.html#v4) | Support Library API 4+|
 | [Android AppCompat-v7](http://developer.android.com/tools/support-library/features.html#v7-appcompat) | Support Library API 7+|
-| [Android Google Play Services](https://developer.android.com/google/play-services/index.html) | Admob, Analytics, etc
 
 ####Testing Frameworks:
 |Name|Description|

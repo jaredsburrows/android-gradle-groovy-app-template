@@ -25,7 +25,7 @@ android:
 
 #connecteddebugandroidtest
 script:
-    - ./gradlew clean testDebug :app:all-libraries:assembleAndroidTest :app:all-libraries:jacocoDebugReport :app:all-libraries:coveralls --stacktrace
+    - ./gradlew clean testDebug :app:example:assembleAndroidTest :app:example:jacocoDebugReport :app:example:coveralls --stacktrace
 
 notifications:
   email: false
