@@ -24,7 +24,7 @@
         android:allowBackup="true"
         android:supportsRtl="true">
         <activity
-            android:name="burrows.apps.example.template.activity.MainActivity"
+            android:name=".activity.MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>

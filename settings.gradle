@@ -1,4 +1,4 @@
 rootProject.name = 'android-gradle-groovy-template'
 
-include ':app:example'
-include ':lib:test'
+include ':app'
+include ':test-lib'
