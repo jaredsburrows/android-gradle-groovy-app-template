@@ -77,7 +77,7 @@ configure(project(':app').subprojects) {
         compile 'org.codehaus.groovy:groovy:2.4.5:grooid'
 
         // Android Support Library for AppCompat
-        compile 'com.android.support:appcompat-v7:23.1.1'
+//        compile 'com.android.support:appcompat-v7:23.1.1'
 
         // Espresso Instrumentation Testing
         // androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
@@ -106,8 +106,8 @@ configure(project(':lib').subprojects) {
             compile 'org.robospock:robospock:1.0.0'
 
             // Robolectric + Support v4
-            compile 'org.robolectric:shadows-play-services:3.0'
-            compile 'org.robolectric:shadows-support-v4:3.0'
+//            compile 'org.robolectric:shadows-play-services:3.0'
+//            compile 'org.robolectric:shadows-support-v4:3.0'
         }
 
         // only apply testing project to all other projects
