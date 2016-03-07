@@ -8,7 +8,6 @@ buildscript {
     dependencies {
         // android gradle plugin
         classpath 'com.android.tools.build:gradle:1.5.0'
-        // com.android.tools.build:gradle:2.0.0-alpha3
         // android command plugin
         classpath 'com.novoda:gradle-android-command-plugin:1.5.0'
         // google error-prone
@@ -75,14 +74,14 @@ configure(project('app')) {
 
     dependencies {
         // Groovy
-        compile 'org.codehaus.groovy:groovy:2.4.5:grooid'
+        compile 'org.codehaus.groovy:groovy:2.4.6:grooid'
 
         // Android Support Library for AppCompat
-//        compile 'com.android.support:appcompat-v7:23.1.1'
+//        compile 'com.android.support:appcompat-v7:23.2.0'
 
         // Espresso Instrumentation Testing
-        androidTestCompile 'com.android.support:support-annotations:23.1.1'
-        androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2.1') {
+        androidTestCompile 'com.android.support:support-annotations:23.2.0'
+        androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2.2') {
             exclude module: 'appcompat'
             exclude module: 'support-v4'
             exclude module: 'recyclerview-v7'
