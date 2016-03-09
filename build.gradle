@@ -45,9 +45,11 @@ configure(project('app')) {
             testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
         }
 
-        sourceSets.main {
-            jni.srcDirs = []
-            jniLibs.srcDir 'src/main/libs'
+        // Shouldn't the plugin be doing this for us?
+        sourceSets {
+            androidTest.java.srcDirs += 'src/androidTest/groovy'
+            main.java.srcDirs += 'src/main/groovy'
+            test.java.srcDirs += 'src/test/groovy'
         }
 
         signingConfigs.debug {
