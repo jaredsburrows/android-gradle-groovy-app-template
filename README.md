@@ -1,4 +1,4 @@
-android-gradle-groovy-template [![Status](https://travis-ci.org/jaredsburrows/android-gradle-groovy-template.svg?branch=master)](https://travis-ci.org/jaredsburrows/android-gradle-groovy-template) [![Coverage Status](https://coveralls.io/repos/jaredsburrows/android-gradle-groovy-template/badge.svg?branch=master)](https://coveralls.io/r/jaredsburrows/android-gradle-groovy-template?branch=master)
+android-gradle-groovy-app-template [![Status](https://travis-ci.org/jaredsburrows/android-gradle-groovy-app-template.svg?branch=master)](https://travis-ci.org/jaredsburrows/android-gradle-groovy-app-template) [![Coverage Status](https://coveralls.io/repos/jaredsburrows/android-gradle-groovy-app-template/badge.svg?branch=master)](https://coveralls.io/r/jaredsburrows/android-gradle-groovy-app-template?branch=master)
 =========
 Gradle + Android Studio + Robolectric + Espresso + RoboSpock + JaCoCo
 
@@ -57,7 +57,7 @@ Gradle + Android Studio + Robolectric + Espresso + RoboSpock + JaCoCo
 
 ## Comand Line(Advanced):
 ##### Clone with `Git`:
- - `git clone https://github.com/jaredsburrows/android-gradle-groovy-template.git`
+ - `git clone https://github.com/jaredsburrows/android-gradle-groovy-app-template.git`
  - `cd AndroidGradleTemplate`
 
 ##### Installing/Running with `Gradle`:
@@ -87,7 +87,7 @@ Gradle + Android Studio + Robolectric + Espresso + RoboSpock + JaCoCo
 License
 =========
 
-    Copyright (C) 2015 android-gradle-groovy-template by Jared Burrows
+    Copyright (C) 2015 android-gradle-groovy-app-template by Jared Burrows
    
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
