@@ -100,12 +100,12 @@ dependencies {
     compile 'org.codehaus.groovy:groovy:2.4.6:grooid'
 
     // Android Support Library for AppCompat
-//        compile 'com.android.support:appcompat-v7:23.2.0'
+    compile 'com.android.support:appcompat-v7:23.3.0'
 
     // Espresso Instrumentation Testing
-    androidTestCompile 'com.android.support:support-annotations:23.2.0'
+    androidTestCompile 'com.android.support:support-annotations:23.3.0'
     androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2.2') {
-        exclude module: 'appcompat'
+        exclude module: 'appcompat-v7'
         exclude module: 'support-v4'
         exclude module: 'recyclerview-v7'
     }

@@ -1,4 +1,4 @@
-package burrows.apps.example.template.activity;
+package burrows.apps.example.template.activity
 
 import org.robolectric.Robolectric
 import org.robospock.GradleRoboSpecification
@@ -12,7 +12,7 @@ class MainActivitySpec extends GradleRoboSpecification {
 
     def "activity should not be null"() {
         when:
-        def mainActivity = Robolectric.buildActivity(MainActivity).create().get()
+        def mainActivity = Robolectric.setupActivity(MainActivity)
 
         then:
         mainActivity != null
