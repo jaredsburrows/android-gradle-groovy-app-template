@@ -1,121 +1,116 @@
 buildscript {
     repositories {
-        jcenter()
-        maven { url 'https://plugins.gradle.org/m2/' } // official gradle plugins
-        maven { url 'https://jitpack.io' }
+        maven { url 'https://plugins.gradle.org/m2/' } // Mirrors jcenter() and mavenCentral()
     }
 
     dependencies {
-        // android gradle plugin
-        classpath 'com.android.tools.build:gradle:1.5.0'
-        // android command plugin
+        // Android gradle plugin
+        classpath 'com.android.tools.build:gradle:2.1.0'
+        // Android command plugin
         classpath 'com.novoda:gradle-android-command-plugin:1.5.0'
-        // google error-prone
+        // Google error-prone
         classpath 'net.ltgt.gradle:gradle-errorprone-plugin:0.0.8'
-        // publish to google play store
+        // Publish to google play store
         classpath 'com.github.triplet.gradle:play-publisher:1.1.4'
-        // dex method count
-        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.3.1'
-        // apk size
-        classpath 'com.vanniktech:gradle-android-apk-size-plugin:0.1.2'
-        // check for plugin updates
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.11.3'
-        // code coverage
-        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.4.0'
-        // groovy plugin
-        classpath 'com.github.groovy:groovy-android-gradle-plugin:1b77dd6763' // latest snapshot
+        // Dex method count
+        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.5.0'
+        // Check for plugin updates
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.12.0'
+        // Apk size
+        classpath 'com.vanniktech:gradle-android-apk-size-plugin:0.2.0'
+        // Code coverage
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.6.3'
+        // Groovy plugin
+        classpath 'org.codehaus.groovy:gradle-groovy-android-plugin:0.3.10'
     }
 }
 
-configure(project('app')) {
-    apply plugin: 'com.android.application'
-    apply plugin: 'android-command'
-    apply plugin: 'com.github.triplet.play'
-    apply plugin: 'com.getkeepsafe.dexcount'
-    apply plugin: 'com.vanniktech.android.apk.size'
-    apply plugin: 'groovyx.grooid.groovy-android'
-    apply from: rootProject.file('common.gradle')
+repositories {
+    maven { url 'https://plugins.gradle.org/m2/' } // Mirrors jcenter() and mavenCentral()
+}
 
-    android {
-        defaultConfig {
-            applicationId 'burrows.apps.example.template'
-            versionCode 1
-            versionName '1.0'
-            // for espresso tests
-            testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
-        }
+// https://github.com/tbroyer/gradle-errorprone-plugin/issues/18
+configurations.all {
+    resolutionStrategy.force 'com.google.errorprone:error_prone_core:2.0.5'
+}
 
-        // Shouldn't the plugin be doing this for us?
-        sourceSets {
-            androidTest.java.srcDirs += 'src/androidTest/groovy'
-            main.java.srcDirs += 'src/main/groovy'
-            test.java.srcDirs += 'src/test/groovy'
-        }
+apply plugin: 'com.android.application'
+apply plugin: 'android-command'
+apply plugin: 'net.ltgt.errorprone'
+apply plugin: 'com.github.triplet.play'
+apply plugin: 'com.getkeepsafe.dexcount'
+apply plugin: 'com.github.kt3k.coveralls'
+apply plugin: 'com.github.ben-manes.versions'
+apply plugin: 'groovyx.grooid.groovy-android'
+apply plugin: 'com.vanniktech.android.apk.size'
+apply from: rootProject.file('./gradle/compile.gradle')
+apply from: rootProject.file('./gradle/android.gradle')
+apply from: rootProject.file('./gradle/codeQuality.gradle')
 
-        signingConfigs.debug {
-            storeFile rootProject.file('debug.keystore')
+android {
+    defaultConfig {
+        applicationId 'burrows.apps.example.template'
+        versionCode 1
+        versionName '1.0'
+        // For espresso tests
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+    }
+
+    // Shouldn't the plugin be doing this for us?
+    sourceSets {
+        androidTest.java.srcDirs += 'src/androidTest/groovy'
+        main.java.srcDirs += 'src/main/groovy'
+        test.java.srcDirs += 'src/test/groovy'
+    }
+
+    // Debug - testing and letting others use
+    signingConfigs {
+        debug {
+            storeFile rootProject.file('./.buildscript/debug.keystore')
             storePassword 'android'
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+    }
 
-        buildTypes.release {
+    buildTypes {
+        release {
             minifyEnabled false
             proguardFiles(getDefaultProguardFile('proguard-android-optimize.txt'),
                     'proguard-rules.pro')
             signingConfig signingConfigs.debug
         }
     }
-
-    // publishing to google play
-    play {
-        serviceAccountEmail = 'jaredsburrows@gmail.com'
-        pk12File = file('key.p12')
-        track = 'production' // or 'beta' or 'alpha'
-    }
-
-    dependencies {
-        // Groovy
-        compile 'org.codehaus.groovy:groovy:2.4.6:grooid'
-
-        // Android Support Library for AppCompat
-//        compile 'com.android.support:appcompat-v7:23.2.0'
-
-        // Espresso Instrumentation Testing
-        androidTestCompile 'com.android.support:support-annotations:23.2.0'
-        androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2.2') {
-            exclude module: 'appcompat'
-            exclude module: 'support-v4'
-            exclude module: 'recyclerview-v7'
-        }
-
-        // Unit Tests
-        testCompile project(':test-lib')
-    }
 }
 
-configure(project('test-lib')) {
-    apply plugin: 'com.android.library'
-    apply from: rootProject.file('common.gradle')
+// Publishing to google play
+play {
+    serviceAccountEmail = 'jaredsburrows@gmail.com'
+    pk12File = rootProject.file('./.buildscript/key.p12')
+    track = 'production' // or 'beta' or 'alpha'
+}
 
-    android.lintOptions {
-        disable 'UnusedResources', 'LogConditional'
+// Only allows specifying of a single file
+coveralls {
+    jacocoReportPath = "${buildDir}/reports/jacoco/jacocoDebugReport/jacocoDebugReport.xml"
+}
+
+dependencies {
+    // Groovy
+    compile 'org.codehaus.groovy:groovy:2.4.6:grooid'
+
+    // Android Support Library for AppCompat
+//        compile 'com.android.support:appcompat-v7:23.2.0'
+
+    // Espresso Instrumentation Testing
+    androidTestCompile 'com.android.support:support-annotations:23.2.0'
+    androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2.2') {
+        exclude module: 'appcompat'
+        exclude module: 'support-v4'
+        exclude module: 'recyclerview-v7'
     }
 
-    dependencies {
-        // testing
-        if (name.contains('test')) {
-            // Robo Spock
-            compile 'org.robospock:robospock:1.0.0'
-
-            // Robolectric + Support v4
-//            compile 'org.robolectric:shadows-play-services:3.0'
-//            compile 'org.robolectric:shadows-support-v4:3.0'
-        }
-
-        // only apply testing project to all other projects
-        if (!name.contains('test')) {
-            testCompile project(':test-lib')
-        }
-    }
+    // Unit Tests
+    // Robo Spock
+    testCompile 'org.robospock:robospock:1.0.0'
 }
