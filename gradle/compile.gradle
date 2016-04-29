@@ -32,7 +32,6 @@ tasks.withType(GroovyCompile) {
     }
 }
 
-
 // Turn on logging for all tests, filter to show failures/skips only
 tasks.withType(Test) {
     testLogging {
