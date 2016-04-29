@@ -1,4 +1,4 @@
-android-gradle-groovy-app-template [![Status](https://travis-ci.org/jaredsburrows/android-gradle-groovy-app-template.svg?branch=master)](https://travis-ci.org/jaredsburrows/android-gradle-groovy-app-template) [![Coverage Status](https://coveralls.io/repos/jaredsburrows/android-gradle-groovy-app-template/badge.svg?branch=master)](https://coveralls.io/r/jaredsburrows/android-gradle-groovy-app-template?branch=master)
+android-gradle-groovy-app-template [![Status](https://travis-ci.org/jaredsburrows/android-gradle-groovy-app-template.svg?branch=master)](https://travis-ci.org/jaredsburrows/android-gradle-groovy-app-template) [![Coverage Status](https://coveralls.io/repos/github/jaredsburrows/android-gradle-groovy-app-template/badge.svg?branch=master)](https://coveralls.io/github/jaredsburrows/android-gradle-groovy-app-template?branch=master)
 =========
 Gradle + Android Studio + Robolectric + Espresso + RoboSpock + JaCoCo
 
