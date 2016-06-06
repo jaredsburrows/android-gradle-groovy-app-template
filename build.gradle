@@ -1,83 +1,83 @@
 buildscript {
     repositories {
-        maven { url 'https://plugins.gradle.org/m2/' } // Mirrors jcenter() and mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" } // Mirrors jcenter() and mavenCentral()
     }
 
     dependencies {
         // Android gradle plugin
-        classpath 'com.android.tools.build:gradle:2.1.0'
+        classpath "com.android.tools.build:gradle:2.1.0"
         // Android command plugin
-        classpath 'com.novoda:gradle-android-command-plugin:1.5.0'
+        classpath "com.novoda:gradle-android-command-plugin:1.5.0"
         // Google error-prone
-        classpath 'net.ltgt.gradle:gradle-errorprone-plugin:0.0.8'
+        classpath "net.ltgt.gradle:gradle-errorprone-plugin:0.0.8"
         // Publish to google play store
-        classpath 'com.github.triplet.gradle:play-publisher:1.1.4'
+        classpath "com.github.triplet.gradle:play-publisher:1.1.4"
         // Dex method count
-        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.5.0'
+        classpath "com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.5.2"
         // Check for plugin updates
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.12.0'
+        classpath "com.github.ben-manes:gradle-versions-plugin:0.12.0"
         // Apk size
-        classpath 'com.vanniktech:gradle-android-apk-size-plugin:0.2.0'
+        classpath "com.vanniktech:gradle-android-apk-size-plugin:0.2.0"
         // Code coverage
-        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.6.3'
+        classpath "org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.6.3"
         // Groovy plugin
-        classpath 'org.codehaus.groovy:gradle-groovy-android-plugin:0.3.10'
+        classpath "org.codehaus.groovy:gradle-groovy-android-plugin:0.3.10"
     }
 }
 
 repositories {
-    maven { url 'https://plugins.gradle.org/m2/' } // Mirrors jcenter() and mavenCentral()
+    maven { url "https://plugins.gradle.org/m2/" } // Mirrors jcenter() and mavenCentral()
 }
 
 // https://github.com/tbroyer/gradle-errorprone-plugin/issues/18
 configurations.all {
-    resolutionStrategy.force 'com.google.errorprone:error_prone_core:2.0.5'
+    resolutionStrategy.force "com.google.errorprone:error_prone_core:2.0.5"
 }
 
-apply plugin: 'com.android.application'
-apply plugin: 'groovyx.grooid.groovy-android'
-apply plugin: 'android-command'
-apply plugin: 'net.ltgt.errorprone'
-apply plugin: 'com.github.triplet.play'
-apply plugin: 'com.getkeepsafe.dexcount'
-apply plugin: 'com.github.kt3k.coveralls'
-apply plugin: 'com.github.ben-manes.versions'
-apply plugin: 'com.vanniktech.android.apk.size'
-apply from: rootProject.file('./gradle/compile.gradle')
-apply from: rootProject.file('./gradle/android.gradle')
-apply from: rootProject.file('./gradle/codeQuality.gradle')
+apply plugin: "com.android.application"
+apply plugin: "groovyx.grooid.groovy-android"
+apply plugin: "android-command"
+apply plugin: "net.ltgt.errorprone"
+apply plugin: "com.github.triplet.play"
+apply plugin: "com.getkeepsafe.dexcount"
+apply plugin: "com.github.kt3k.coveralls"
+apply plugin: "com.github.ben-manes.versions"
+apply plugin: "com.vanniktech.android.apk.size"
+apply from: rootProject.file("./gradle/compile.gradle")
+apply from: rootProject.file("./gradle/android.gradle")
+apply from: rootProject.file("./gradle/codeQuality.gradle")
 
 android {
     defaultConfig {
-        applicationId 'burrows.apps.example.template'
+        applicationId "burrows.apps.example.template"
         versionCode 1
-        versionName '1.0'
+        versionName "1.0"
         // For espresso tests
-        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
-    // Shouldn't the plugin be doing this for us?
+    // Shouldn"t the plugin be doing this for us?
     sourceSets {
-        androidTest.java.srcDirs += 'src/androidTest/groovy'
-        main.java.srcDirs += 'src/main/groovy'
-        test.java.srcDirs += 'src/test/groovy'
+        androidTest.java.srcDirs += "src/androidTest/groovy"
+        main.java.srcDirs += "src/main/groovy"
+        test.java.srcDirs += "src/test/groovy"
     }
 
     // Debug - testing and letting others use
     signingConfigs {
         debug {
-            storeFile rootProject.file('./.buildscript/debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
+            storeFile rootProject.file("./.buildscript/debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
         }
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles(getDefaultProguardFile('proguard-android-optimize.txt'),
-                    'proguard-rules.pro')
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro")
             signingConfig signingConfigs.debug
         }
     }
@@ -85,9 +85,9 @@ android {
 
 // Publishing to google play
 play {
-    serviceAccountEmail = 'jaredsburrows@gmail.com'
-    pk12File = rootProject.file('./.buildscript/key.p12')
-    track = 'production' // or 'beta' or 'alpha'
+    serviceAccountEmail = "jaredsburrows@gmail.com"
+    pk12File = rootProject.file("./.buildscript/key.p12")
+    track = "production" // or "beta" or "alpha"
 }
 
 // Only allows specifying of a single file
@@ -97,20 +97,20 @@ coveralls {
 
 dependencies {
     // Groovy
-    compile 'org.codehaus.groovy:groovy:2.4.6:grooid'
+    compile "org.codehaus.groovy:groovy:2.4.6:grooid"
 
     // Android Support Library for AppCompat
-    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile "com.android.support:appcompat-v7:23.4.0"
 
     // Espresso Instrumentation Testing
-    androidTestCompile 'com.android.support:support-annotations:23.3.0'
-    androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2.2') {
-        exclude module: 'appcompat-v7'
-        exclude module: 'support-v4'
-        exclude module: 'recyclerview-v7'
+    androidTestCompile "com.android.support:support-annotations:23.4.0"
+    androidTestCompile("com.android.support.test.espresso:espresso-contrib:2.2.2") {
+        exclude module: "appcompat-v7"
+        exclude module: "support-v4"
+        exclude module: "recyclerview-v7"
     }
 
     // Unit Tests
     // Robo Spock
-    testCompile 'org.robospock:robospock:1.0.0'
+    testCompile "org.robospock:robospock:1.0.0"
 }
