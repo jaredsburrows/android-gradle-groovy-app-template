@@ -4,6 +4,8 @@ buildscript {
     }
 
     dependencies {
+        // Gradle build receipt
+        classpath "com.gradle:build-receipt-plugin:1.2"
         // Android gradle plugin
         classpath "com.android.tools.build:gradle:2.1.0"
         // Android command plugin
@@ -34,6 +36,7 @@ configurations.all {
     resolutionStrategy.force "com.google.errorprone:error_prone_core:2.0.5"
 }
 
+apply from: rootProject.file("gradle/receipt.gradle")
 apply plugin: "com.android.application"
 apply plugin: "groovyx.grooid.groovy-android"
 apply plugin: "android-command"
