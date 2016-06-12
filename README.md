@@ -1,5 +1,8 @@
-android-gradle-groovy-app-template [![Status](https://travis-ci.org/jaredsburrows/android-gradle-groovy-app-template.svg?branch=master)](https://travis-ci.org/jaredsburrows/android-gradle-groovy-app-template) [![Coverage Status](https://coveralls.io/repos/github/jaredsburrows/android-gradle-groovy-app-template/badge.svg?branch=master)](https://coveralls.io/github/jaredsburrows/android-gradle-groovy-app-template?branch=master)
-=========
+# Android Gradle Groovy App Template 
+|TravisCI(OSX)|CircleCI(Linux)|AppVeyor(Windows)|Coveralls|
+|:---:|:---:|:---:|:---:|
+|[![TravisCI](https://travis-ci.org/jaredsburrows/android-gradle-groovy-app-template.svg?branch=master)](https://travis-ci.org/jaredsburrows/android-gradle-groovy-app-template)|[![CircleCI](https://circleci.com/gh/jaredsburrows/android-gradle-groovy-app-template.svg?style=shield)](https://circleci.com/gh/jaredsburrows/android-gradle-groovy-app-template)|[![AppVeyor](https://ci.appveyor.com/api/projects/status/auba8i2kynl66h3u/branch/master?svg=true)](https://ci.appveyor.com/project/jaredsburrows/android-gradle-groovy-app-template/branch/master)|[![Coveralls](https://coveralls.io/repos/github/jaredsburrows/android-gradle-groovy-app-template/badge.svg?branch=master)](https://coveralls.io/github/jaredsburrows/android-gradle-groovy-app-template?branch=master)|
+
 Gradle + Android Studio + Robolectric + Espresso + RoboSpock + JaCoCo
 
 ## Technologies used:
