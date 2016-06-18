@@ -90,7 +90,7 @@ Gradle + Android Studio + Robolectric + Espresso + RoboSpock + JaCoCo
 License
 =========
 
-    Copyright (C) 2015 android-gradle-groovy-app-template by Jared Burrows
+    Copyright (C) 2015 Android Gradle Groovy App Template by Jared Burrows
    
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
