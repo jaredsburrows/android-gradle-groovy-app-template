@@ -56,9 +56,23 @@ android {
 
     // Shouldn"t the plugin be doing this for us?
     sourceSets {
-        androidTest.java.srcDirs += "src/androidTest/groovy"
-        main.java.srcDirs += "src/main/groovy"
-        test.java.srcDirs += "src/test/groovy"
+        androidTest {
+            java {
+                srcDirs += "src/androidTest/groovy"
+            }
+        }
+
+        main {
+            java {
+                srcDirs += "src/main/groovy"
+            }
+        }
+
+        test {
+            java {
+                srcDirs += "src/test/groovy"
+            }
+        }
     }
 
     // Debug - testing and letting others use
