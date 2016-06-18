@@ -107,13 +107,6 @@ coveralls {
     jacocoReportPath = "${buildDir}/reports/jacoco/jacocoDebugReport/jacocoDebugReport.xml"
 }
 
-// https://github.com/tbroyer/gradle-errorprone-plugin/issues/18
-configurations.all {
-    resolutionStrategy {
-        force "com.google.errorprone:error_prone_core:2.0.5"
-    }
-}
-
 dependencies {
     // Groovy
     compile "org.codehaus.groovy:groovy:2.4.7:grooid"
