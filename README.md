@@ -1,7 +1,10 @@
 # Android Gradle Groovy App Template 
-|TravisCI(OSX)|CircleCI(Linux)|AppVeyor(Windows)|Coveralls|
-|:---:|:---:|:---:|:---:|
-|[![TravisCI](https://travis-ci.org/jaredsburrows/android-gradle-groovy-app-template.svg?branch=master)](https://travis-ci.org/jaredsburrows/android-gradle-groovy-app-template)|[![CircleCI](https://circleci.com/gh/jaredsburrows/android-gradle-groovy-app-template.svg?style=shield)](https://circleci.com/gh/jaredsburrows/android-gradle-groovy-app-template)|[![AppVeyor](https://ci.appveyor.com/api/projects/status/auba8i2kynl66h3u/branch/master?svg=true)](https://ci.appveyor.com/project/jaredsburrows/android-gradle-groovy-app-template/branch/master)|[![Coveralls](https://coveralls.io/repos/github/jaredsburrows/android-gradle-groovy-app-template/badge.svg?branch=master)](https://coveralls.io/github/jaredsburrows/android-gradle-groovy-app-template?branch=master)|
+
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
+[![TravisCI OSX Build](https://img.shields.io/travis/jaredsburrows/android-gradle-groovy-app-template/master.svg?label=OSX%20Build)](https://travis-ci.org/jaredsburrows/android-gradle-groovy-app-template)
+[![CircleCI Linux Build](https://img.shields.io/circleci/project/jaredsburrows/android-gradle-groovy-app-template/master.svg?label=Linux%20Build)](https://circleci.com/gh/jaredsburrows/android-gradle-groovy-app-template)
+[![AppVeyor Windows Build](https://img.shields.io/appveyor/ci/jaredsburrows/android-gradle-groovy-app-template/master.svg?label=Windows%20Build)](https://ci.appveyor.com/project/jaredsburrows/android-gradle-groovy-app-template/branch/master)
+[![Coveralls Code Coverage](https://img.shields.io/coveralls/jaredsburrows/android-gradle-groovy-app-template/master.svg?label=Code%20Coverage)](https://coveralls.io/github/jaredsburrows/android-gradle-groovy-app-template?branch=master)
 
 Gradle + Android Studio + Robolectric + Espresso + RoboSpock + JaCoCo
 
@@ -86,20 +89,3 @@ Gradle + Android Studio + Robolectric + Espresso + RoboSpock + JaCoCo
    - `gradlew testDebug --tests="*MainActivityTest*"`
  - **Run a single unit test in the `debug flavor` with `Jacoco` test reports:**
    - `gradlew testDebug --tests="*MainActivityTest*" jacocoDebugReport`
-
-License
-=========
-
-    Copyright (C) 2015 Android Gradle Groovy App Template by Jared Burrows
-   
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.

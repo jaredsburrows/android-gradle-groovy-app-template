@@ -1,26 +1,26 @@
 buildscript {
-    ext.myRepos = {
+    ext.repos = {
         maven {
-            url "https://plugins.gradle.org/m2/"                            // Mirrors jcenter() and mavenCentral()
+            url "https://plugins.gradle.org/m2/"
         }
     }
-    repositories myRepos
+    repositories repos
 
     dependencies {
-        classpath "com.android.tools.build:gradle:2.1.2"                    // Android gradle plugin
-        classpath "com.novoda:gradle-android-command-plugin:1.5.0"          // Android command plugin
-        classpath "com.github.triplet.gradle:play-publisher:1.1.4"          // Publish to google play store
-        classpath "com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.5.4"   // Dex method count
-        classpath "com.vanniktech:gradle-android-apk-size-plugin:0.2.0"     // Apk size
-        classpath "org.codehaus.groovy:gradle-groovy-android-plugin:0.3.10" // Groovy plugin
+        classpath "com.android.tools.build:gradle:2.1.2"
+        classpath "com.novoda:gradle-android-command-plugin:1.5.0"
+        classpath "com.github.triplet.gradle:play-publisher:1.1.4"
+        classpath "com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.5.4"
+        classpath "com.vanniktech:gradle-android-apk-size-plugin:0.2.0"
+        classpath "org.codehaus.groovy:gradle-groovy-android-plugin:0.3.10"
     }
 }
 
 plugins {
-    id "com.gradle.build-scan" version "1.0"                                // Gradle build receipt
-    id "net.ltgt.errorprone" version "0.0.8"                                // Google error-prone
-    id "com.github.kt3k.coveralls" version "2.6.3"                          // Code coverage
-    id "com.github.ben-manes.versions" version "0.12.0"                     // Check for plugin updates
+    id "com.gradle.build-scan" version "1.0"
+    id "net.ltgt.errorprone" version "0.0.8"
+    id "com.github.kt3k.coveralls" version "2.6.3"
+    id "com.github.ben-manes.versions" version "0.12.0"
     id "build-dashboard"
     id "pmd"
     id "jacoco"
@@ -28,7 +28,7 @@ plugins {
     id "checkstyle"
 }
 
-repositories myRepos
+repositories repos
 
 apply plugin: "com.android.application"
 apply plugin: "groovyx.grooid.groovy-android"
