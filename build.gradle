@@ -8,9 +8,9 @@ buildscript {
 
     dependencies {
         classpath "com.android.tools.build:gradle:2.1.2"
-        classpath "com.novoda:gradle-android-command-plugin:1.5.0"
+        classpath "com.novoda:gradle-android-command-plugin:1.6.0"
         classpath "com.github.triplet.gradle:play-publisher:1.1.4"
-        classpath "com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.5.4"
+        classpath "com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.5.5"
         classpath "com.vanniktech:gradle-android-apk-size-plugin:0.2.0"
         classpath "org.codehaus.groovy:gradle-groovy-android-plugin:0.3.10"
     }
@@ -20,7 +20,7 @@ plugins {
     id "com.gradle.build-scan" version "1.0"
     id "net.ltgt.errorprone" version "0.0.8"
     id "com.github.kt3k.coveralls" version "2.6.3"
-    id "com.github.ben-manes.versions" version "0.12.0"
+    id "com.github.ben-manes.versions" version "0.13.0"
     id "build-dashboard"
     id "pmd"
     id "jacoco"
@@ -90,6 +90,14 @@ android {
     }
 }
 
+configurations {
+    all {
+        resolutionStrategy {
+            force "com.google.errorprone:error_prone_core:2.0.9"
+        }
+    }
+}
+
 dependencies {
     // Groovy
     compile "org.codehaus.groovy:groovy:2.4.7:grooid"
@@ -99,9 +107,15 @@ dependencies {
 
     // Espresso Instrumentation Testing
     androidTestCompile "com.android.support:support-annotations:24.0.0"
+    androidTestCompile "com.android.support.test.espresso:espresso-core:2.2.2"
+    androidTestCompile "com.android.support.test:runner:0.5"
+    androidTestCompile "com.android.support.test.espresso:espresso-intents:2.2.2"
     androidTestCompile("com.android.support.test.espresso:espresso-contrib:2.2.2") {
-        exclude module: "appcompat-v7"
+        exclude module: "appcompat"
         exclude module: "support-v4"
+        exclude module: "support-v7"
+        exclude module: "design"
+        exclude module: "support-annotations"
         exclude module: "recyclerview-v7"
     }
 
