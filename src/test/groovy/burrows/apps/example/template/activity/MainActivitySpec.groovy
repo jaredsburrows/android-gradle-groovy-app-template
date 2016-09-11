@@ -8,7 +8,6 @@ import org.robospock.GradleRoboSpecification
 
 /**
  * @author <a href="mailto:jaredsburrows@gmail.com">Jared Burrows</a>
- * @since 0.0.1
  */
 @Config(constants = BuildConfig, sdk = Build.VERSION_CODES.LOLLIPOP)
 class MainActivitySpec extends GradleRoboSpecification {

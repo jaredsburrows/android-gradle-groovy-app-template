@@ -12,10 +12,11 @@ tasks.withType(JavaCompile) {
         compilerArgs << "-Werror"               // Turn warnings into errors
         compilerArgs << "-Xdiags:verbose"       // Turn on verbose errors
         encoding = "utf-8"
+        incremental = true
+        fork = true
     }
 }
 
-// Turn on all warnings and errors
 tasks.withType(GroovyCompile) {
     sourceCompatibility = JavaVersion.VERSION_1_7
     targetCompatibility = JavaVersion.VERSION_1_7
@@ -29,6 +30,13 @@ tasks.withType(GroovyCompile) {
         compilerArgs << "-Werror"               // Turn warnings into errors
         compilerArgs << "-Xdiags:verbose"       // Turn on verbose errors
         encoding = "utf-8"
+        incremental = true
+        fork = true
+    }
+
+    configure(groovyOptions) {
+        encoding = "utf-8"
+        fork = true
     }
 }
 
@@ -40,7 +48,7 @@ tasks.withType(Test) {
         showExceptions true
         showStackTraces true
         showStandardStreams true
-        events = ["failed", "skipped"]
+        events "failed", "skipped"
     }
 }
 
@@ -52,8 +60,8 @@ tasks.withType(Javadoc) {
         windowTitle = "Documentation"
         docTitle = "Documentation"
         bottom = "Copyright &copy; 2011-" + Calendar.getInstance().get(Calendar.YEAR) +
-                ", Burrows Apps, LLC. All Rights Reserved. <a href=\"http://www.burrowsapps.com\" " +
-                "target=\"_blank\">Burrows apps</a>."
+            ", Burrows Apps, LLC. All Rights Reserved. <a href=\"http://www.burrowsapps.com\" " +
+            "target=\"_blank\">Burrows apps</a>."
         memberLevel = JavadocMemberLevel.PROTECTED
         links = ["http://docs.oracle.com/javase/8/docs/api/",
                  "http://docs.oracle.com/javase/7/docs/api/"]

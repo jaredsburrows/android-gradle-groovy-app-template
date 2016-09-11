@@ -13,16 +13,13 @@ init:
 install:
   - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t tools
   - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t platform-tools
-  - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t build-tools-24.0.1
+  - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t build-tools-24.0.2
   - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t android-24
   - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t extra-google-m2repository
-  - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t extra-google-google_play_services
-  - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t extra-android-support
   - echo y | "%ANDROID_HOME%\tools\android.bat" update sdk -u -a -t extra-android-m2repository
 
 build_script:
-# - del /F /Q "%USERPROFILE%\.gradle\caches\modules-2\modules-2.lock" 2>NUL
-  - gradlew.bat clean assembleDebug testDebug jacocoDebugReport coveralls -Dscan --configure-on-demand --daemon --parallel --stacktrace
+  - gradlew.bat clean testDebug jacocoDebugReport -Dscan --configure-on-demand --parallel --stacktrace
 
 artifacts:
   - path: "build\\reports\\"
