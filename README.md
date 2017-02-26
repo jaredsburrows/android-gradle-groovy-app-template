@@ -1,9 +1,7 @@
 # Android Gradle Groovy App Template 
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
-[![TravisCI OSX Build](https://img.shields.io/travis/jaredsburrows/android-gradle-groovy-app-template/master.svg?label=OSX%20Build)](https://travis-ci.org/jaredsburrows/android-gradle-groovy-app-template)
-[![CircleCI Linux Build](https://img.shields.io/circleci/project/jaredsburrows/android-gradle-groovy-app-template/master.svg?label=Linux%20Build)](https://circleci.com/gh/jaredsburrows/android-gradle-groovy-app-template)
-[![AppVeyor Windows Build](https://img.shields.io/appveyor/ci/jaredsburrows/android-gradle-groovy-app-template/master.svg?label=Windows%20Build)](https://ci.appveyor.com/project/jaredsburrows/android-gradle-groovy-app-template/branch/master)
+[![TravisCI Build](https://img.shields.io/travis/jaredsburrows/android-gradle-groovy-app-template/master.svg)](https://travis-ci.org/jaredsburrows/android-gradle-groovy-app-template)
 [![Coveralls Code Coverage](https://img.shields.io/coveralls/jaredsburrows/android-gradle-groovy-app-template/master.svg?label=Code%20Coverage)](https://coveralls.io/github/jaredsburrows/android-gradle-groovy-app-template?branch=master)
 [![Twitter Follow](https://img.shields.io/twitter/follow/jaredsburrows.svg?style=social)](https://twitter.com/jaredsburrows)
 
@@ -86,7 +84,7 @@ This project builds with [Gradle](www.gradle.org) and the Android Build [tools](
 **Running the Unit Tests:**
 
 
-The [Junit](http://junit.org/junit4/) and [Robolectric](https://github.com/robolectric/robolectric) tests run on the JVM, no need for emulators or real devices.
+The [Junit](http://junit.org/junit4/) tests run on the JVM, no need for emulators or real devices.
 
 
     $ gradlew testDebug
