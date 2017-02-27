@@ -21,11 +21,6 @@ repositories {
     maven { url "https://plugins.gradle.org/m2/" }
 }
 
-//task wrapper(type: Wrapper) {
-//    gradleVersion = "3.4"
-//    distributionType = Wrapper.DistributionType.ALL
-//}
-
 apply from: rootProject.file("gradle/buildScan.gradle")
 apply plugin: "com.android.application"
 apply plugin: "groovyx.grooid.groovy-android"
