@@ -4,20 +4,21 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.gradle:build-scan-plugin:1.4"
-        classpath "com.android.tools.build:gradle:2.3.0"
+        classpath "com.gradle:build-scan-plugin:1.8"
+        classpath "com.android.tools.build:gradle:2.3.3"
         classpath "com.novoda:gradle-android-command-plugin:1.7.1"
-        classpath "com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.6.2"
+        classpath "com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.7.3"
         classpath "com.vanniktech:gradle-android-apk-size-plugin:0.3.0"
-        classpath "com.github.triplet.gradle:play-publisher:1.1.4"
+        classpath "com.github.triplet.gradle:play-publisher:1.2.0"
         classpath "org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.1"
-        classpath "net.ltgt.gradle:gradle-errorprone-plugin:0.0.8"
-        classpath "com.github.ben-manes:gradle-versions-plugin:0.14.0"
-        classpath "org.codehaus.groovy:groovy-android-gradle-plugin:1.1.0"
+        classpath "net.ltgt.gradle:gradle-errorprone-plugin:0.0.10"
+        classpath "com.github.ben-manes:gradle-versions-plugin:0.15.0"
+        classpath "org.codehaus.groovy:groovy-android-gradle-plugin:1.2.0"
     }
 }
 
 repositories {
+    google()
     maven { url "https://plugins.gradle.org/m2/" }
 }
 
@@ -30,12 +31,12 @@ apply plugin: "com.vanniktech.android.apk.size"
 apply plugin: "net.ltgt.errorprone"
 apply plugin: "com.github.ben-manes.versions"
 apply from: rootProject.file("gradle/compile.gradle")
-apply from: rootProject.file("gradle/codeQuality.gradle")
+apply from: rootProject.file("gradle/quality.gradle")
 apply from: rootProject.file("gradle/publishing.gradle")
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "25.0.3"
 
     defaultConfig {
         applicationId "burrows.apps.example.template"
@@ -93,6 +94,7 @@ android {
         disable "ResourceType"                 // Annotation binding
         disable "GradleDependency"
         disable "NewerVersionAvailable"
+        disable "OldTargetApi"
     }
 
     testOptions.unitTests {
@@ -104,26 +106,22 @@ android {
     }
 }
 
+configurations.all {
+    resolutionStrategy.force "com.android.support:support-annotations:25.3.0"
+}
+
 dependencies {
     // Groovy
     compile "org.codehaus.groovy:groovy:2.4.9:grooid"
 
     // Android Support Library for AppCompat
-    compile "com.android.support:appcompat-v7:25.2.0"
+    compile "com.android.support:appcompat-v7:25.3.0"
 
     // Espresso Instrumentation Testing
-    androidTestCompile "com.android.support:support-annotations:25.2.0"
-    androidTestCompile "com.android.support.test.espresso:espresso-core:2.2.2"
-    androidTestCompile "com.android.support.test:runner:0.5"
-    androidTestCompile "com.android.support.test.espresso:espresso-intents:2.2.2"
-    androidTestCompile("com.android.support.test.espresso:espresso-contrib:2.2.2") {
-        exclude module: "appcompat"
-        exclude module: "support-v4"
-        exclude module: "support-v7"
-        exclude module: "design"
-        exclude module: "support-annotations"
-        exclude module: "recyclerview-v7"
-    }
+    androidTestCompile "com.android.support.test:runner:1.0"
+    androidTestCompile "com.android.support.test.espresso:espresso-core:3.0.0"
+    androidTestCompile "com.android.support.test.espresso:espresso-intents:3.0.0"
+    androidTestCompile("com.android.support.test.espresso:espresso-contrib:3.0.0") { exclude group: "com.android.support" }
 
     // Robo Spock
     testCompile "org.robospock:robospock:1.0.1"
