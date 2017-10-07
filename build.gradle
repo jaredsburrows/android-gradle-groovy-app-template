@@ -1,25 +1,28 @@
 buildscript {
-    repositories {
-        maven { url "https://plugins.gradle.org/m2/" }
-    }
+  apply from: rootProject.file("gradle/dependencies.gradle")
 
-    dependencies {
-        classpath "com.gradle:build-scan-plugin:1.8"
-        classpath "com.android.tools.build:gradle:2.3.3"
-        classpath "com.novoda:gradle-android-command-plugin:1.7.1"
-        classpath "com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.7.3"
-        classpath "com.vanniktech:gradle-android-apk-size-plugin:0.3.0"
-        classpath "com.github.triplet.gradle:play-publisher:1.2.0"
-        classpath "org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.1"
-        classpath "net.ltgt.gradle:gradle-errorprone-plugin:0.0.10"
-        classpath "com.github.ben-manes:gradle-versions-plugin:0.15.0"
-        classpath "org.codehaus.groovy:groovy-android-gradle-plugin:1.2.0"
-    }
+  repositories {
+    google()
+    maven { url "https://plugins.gradle.org/m2/" }
+  }
+
+  dependencies {
+    classpath "com.gradle:build-scan-plugin:1.9"
+    classpath "com.android.tools.build:gradle:2.3.3"
+    classpath "com.novoda:gradle-android-command-plugin:1.7.1"
+    classpath "com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.1"
+    classpath "com.vanniktech:gradle-android-apk-size-plugin:0.4.0"
+    classpath "com.github.triplet.gradle:play-publisher:1.2.0"
+    classpath "org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.1"
+    classpath "net.ltgt.gradle:gradle-errorprone-plugin:0.0.10"
+    classpath "com.github.ben-manes:gradle-versions-plugin:0.15.0"
+    classpath "org.codehaus.groovy:groovy-android-gradle-plugin:1.2.0"
+  }
 }
 
 repositories {
-    google()
-    maven { url "https://plugins.gradle.org/m2/" }
+  google()
+  maven { url "https://plugins.gradle.org/m2/" }
 }
 
 apply from: rootProject.file("gradle/buildScan.gradle")
@@ -35,98 +38,91 @@ apply from: rootProject.file("gradle/quality.gradle")
 apply from: rootProject.file("gradle/publishing.gradle")
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+  compileSdkVersion rootProject.ext.compileSdkVersion
+  buildToolsVersion rootProject.ext.buildToolsVersion
 
-    defaultConfig {
-        applicationId "burrows.apps.example.template"
-        versionCode 1
-        versionName "1.0"
-        minSdkVersion 16
-        targetSdkVersion 25
-        // Espresso test runner
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
+  defaultConfig {
+    applicationId "burrows.apps.example.template"
+    versionCode 1
+    versionName "1.0"
+    minSdkVersion rootProject.ext.minSdkVersion
+    targetSdkVersion rootProject.ext.targetSdkVersion
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+  }
 
-    // Shouldn"t the plugin be doing this for us?
-    sourceSets {
-        androidTest.java.srcDirs += "src/androidTest/groovy"
-        main.java.srcDirs += "src/main/groovy"
-        test.java.srcDirs += "src/test/groovy"
-    }
+  sourceSets {
+    androidTest.java.srcDirs += "src/androidTest/groovy"
+    main.java.srcDirs += "src/main/groovy"
+    test.java.srcDirs += "src/test/groovy"
+  }
 
-    // Debug - testing and letting others use
-    signingConfigs {
-        debug {
-            storeFile rootProject.file("./.buildscript/debug.keystore")
-            storePassword "android"
-            keyAlias "androiddebugkey"
-            keyPassword "android"
-        }
+  signingConfigs {
+    debug {
+      storeFile rootProject.file("./.buildscript/debug.keystore")
+      storePassword "android"
+      keyAlias "androiddebugkey"
+      keyPassword "android"
     }
+  }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFile getDefaultProguardFile("proguard-android-optimize.txt")
-            proguardFile "proguard-rules.pro"
-            signingConfig signingConfigs.debug
-        }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFile getDefaultProguardFile("proguard-android-optimize.txt")
+      proguardFile "proguard-rules.pro"
+      signingConfig signingConfigs.debug
     }
+  }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
-    }
+  compileOptions {
+    sourceCompatibility "1.7"
+    targetCompatibility "1.7"
+  }
 
-    dexOptions {
-        preDexLibraries !Boolean.valueOf(System.getenv("TRAVIS"))
-    }
+  aaptOptions.cruncherEnabled rootProject.ext.ci
 
-    lintOptions {
-        textOutput "stdout"
-        checkAllWarnings true
-        warningsAsErrors true
-        disable "UnusedResources"              // Unused will be removed on release
-        disable "IconExpectedSize"             // Using the material icons provided from Google
-        disable "GoogleAppIndexingApiWarning"  // We might want to index our app later
-        disable "InvalidPackage"               // Butterknife, Okio and Realm
-        disable "ResourceType"                 // Annotation binding
-        disable "GradleDependency"
-        disable "NewerVersionAvailable"
-        disable "OldTargetApi"
-    }
+  dexOptions.preDexLibraries !rootProject.ext.ci
 
-    testOptions.unitTests {
-        all {
-            jacoco {
-                includeNoLocationClasses = true
-            }
-        }
+  lintOptions {
+    textOutput "stdout"
+    checkAllWarnings true
+    warningsAsErrors true
+    disable "UnusedResources" // Unused will be removed on release
+    disable "IconExpectedSize" // Using the material icons provided from Google
+    disable "GoogleAppIndexingApiWarning" // We might want to index our app later
+    disable "InvalidPackage" // Butterknife, Okio and Realm
+    disable "ResourceType" // Annotation binding
+    disable "GradleDependency"
+    disable "NewerVersionAvailable"
+    disable "OldTargetApi"
+  }
+
+  testOptions.unitTests {
+    all {
+      jacoco {
+        includeNoLocationClasses = true
+      }
     }
+  }
 }
 
+def supportLibraryVersion = "26.1.0"
+def espressoVersion = "3.0.1"
+
 configurations.all {
-    resolutionStrategy.force "com.android.support:support-annotations:25.3.0"
+  resolutionStrategy.force "com.android.support:support-annotations:$supportLibraryVersion"
 }
 
 dependencies {
-    // Groovy
-    compile "org.codehaus.groovy:groovy:2.4.9:grooid"
+  compile "org.codehaus.groovy:groovy:2.4.9:grooid"
+  compile "com.android.support:appcompat-v7:$supportLibraryVersion"
 
-    // Android Support Library for AppCompat
-    compile "com.android.support:appcompat-v7:25.3.0"
+  androidTestCompile "com.android.support.test:runner:1.0.1"
+  androidTestCompile "com.android.support.test.espresso:espresso-core:$espressoVersion"
+  androidTestCompile "com.android.support.test.espresso:espresso-intents:$espressoVersion"
+  androidTestCompile "com.android.support.test.espresso:espresso-contrib:$espressoVersion", { exclude group: "com.android.support" }
 
-    // Espresso Instrumentation Testing
-    androidTestCompile "com.android.support.test:runner:1.0"
-    androidTestCompile "com.android.support.test.espresso:espresso-core:3.0.0"
-    androidTestCompile "com.android.support.test.espresso:espresso-intents:3.0.0"
-    androidTestCompile("com.android.support.test.espresso:espresso-contrib:3.0.0") { exclude group: "com.android.support" }
-
-    // Robo Spock
-    testCompile "org.robospock:robospock:1.0.1"
-
-    // Robolectric + Support v4
-    testCompile "org.robolectric:shadows-support-v4:3.3.1"
-    testCompile "org.khronos:opengl-api:gl1.1-android-2.1_r1"
+  testCompile "org.robospock:robospock:1.0.1"
+  testCompile "org.robolectric:shadows-support-v4:3.3.1"
+  testCompile "org.khronos:opengl-api:gl1.1-android-2.1_r1"
 }
