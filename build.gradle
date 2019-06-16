@@ -25,7 +25,7 @@ repositories {
   maven { url "https://plugins.gradle.org/m2/" }
 }
 
-apply from: rootProject.file("gradle/buildScan.gradle")
+apply from: rootProject.file("gradle/scan.gradle")
 apply plugin: "com.android.application"
 apply plugin: "groovyx.android"
 apply plugin: "android-command"
@@ -35,7 +35,7 @@ apply plugin: "net.ltgt.errorprone"
 apply plugin: "com.github.ben-manes.versions"
 apply from: rootProject.file("gradle/compile.gradle")
 apply from: rootProject.file("gradle/quality.gradle")
-apply from: rootProject.file("gradle/publishing.gradle")
+apply from: rootProject.file("gradle/publish.gradle")
 
 android {
   compileSdkVersion rootProject.ext.compileSdkVersion
