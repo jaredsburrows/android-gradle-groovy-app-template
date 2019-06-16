@@ -7,15 +7,14 @@ buildscript {
   }
 
   dependencies {
-    classpath "com.gradle:build-scan-plugin:1.9"
-    classpath "com.android.tools.build:gradle:2.3.3"
-    classpath "com.novoda:gradle-android-command-plugin:1.7.1"
-    classpath "com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.1"
+    classpath "com.gradle:build-scan-plugin:2.3"
+    classpath "com.android.tools.build:gradle:3.4.1"
+    classpath "com.novoda:gradle-android-command-plugin:2.1.0"
+    classpath "com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.6"
     classpath "com.vanniktech:gradle-android-apk-size-plugin:0.4.0"
     classpath "com.github.triplet.gradle:play-publisher:1.2.0"
-    classpath "org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.1"
-    classpath "net.ltgt.gradle:gradle-errorprone-plugin:0.0.10"
-    classpath "com.github.ben-manes:gradle-versions-plugin:0.15.0"
+    classpath "org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.8.3"
+    classpath "com.github.ben-manes:gradle-versions-plugin:0.21.0"
     classpath "org.codehaus.groovy:groovy-android-gradle-plugin:1.2.0"
   }
 }
@@ -25,21 +24,19 @@ repositories {
   maven { url "https://plugins.gradle.org/m2/" }
 }
 
-apply from: rootProject.file("gradle/buildScan.gradle")
+apply from: rootProject.file("gradle/scan.gradle")
 apply plugin: "com.android.application"
 apply plugin: "groovyx.android"
 apply plugin: "android-command"
 apply plugin: "com.getkeepsafe.dexcount"
 apply plugin: "com.vanniktech.android.apk.size"
-apply plugin: "net.ltgt.errorprone"
 apply plugin: "com.github.ben-manes.versions"
 apply from: rootProject.file("gradle/compile.gradle")
 apply from: rootProject.file("gradle/quality.gradle")
-apply from: rootProject.file("gradle/publishing.gradle")
+apply from: rootProject.file("gradle/publish.gradle")
 
 android {
   compileSdkVersion rootProject.ext.compileSdkVersion
-  buildToolsVersion rootProject.ext.buildToolsVersion
 
   defaultConfig {
     applicationId "burrows.apps.example.template"
@@ -75,11 +72,9 @@ android {
   }
 
   compileOptions {
-    sourceCompatibility "1.7"
-    targetCompatibility "1.7"
+    sourceCompatibility "1.8"
+    targetCompatibility "1.8"
   }
-
-  aaptOptions.cruncherEnabled rootProject.ext.ci
 
   dexOptions.preDexLibraries !rootProject.ext.ci
 
@@ -87,6 +82,7 @@ android {
     textOutput "stdout"
     checkAllWarnings true
     warningsAsErrors true
+    disable "MissingRegistered"
     disable "UnusedResources" // Unused will be removed on release
     disable "IconExpectedSize" // Using the material icons provided from Google
     disable "GoogleAppIndexingApiWarning" // We might want to index our app later
@@ -106,23 +102,19 @@ android {
   }
 }
 
-def supportLibraryVersion = "26.1.0"
-def espressoVersion = "3.0.1"
-
-configurations.all {
-  resolutionStrategy.force "com.android.support:support-annotations:$supportLibraryVersion"
-}
+def supportLibraryVersion = "28.0.0"
+def espressoVersion = "3.0.2"
 
 dependencies {
-  compile "org.codehaus.groovy:groovy:2.4.9:grooid"
-  compile "com.android.support:appcompat-v7:$supportLibraryVersion"
+  implementation "org.codehaus.groovy:groovy:2.4.9:grooid"
+  implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
 
-  androidTestCompile "com.android.support.test:runner:1.0.1"
-  androidTestCompile "com.android.support.test.espresso:espresso-core:$espressoVersion"
-  androidTestCompile "com.android.support.test.espresso:espresso-intents:$espressoVersion"
-  androidTestCompile "com.android.support.test.espresso:espresso-contrib:$espressoVersion", { exclude group: "com.android.support" }
+  androidTestImplementation "com.android.support.test:runner:1.0.2"
+  androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
+  androidTestImplementation "com.android.support.test.espresso:espresso-intents:$espressoVersion"
+  androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$espressoVersion", { exclude group: "com.android.support" }
 
-  testCompile "org.robospock:robospock:1.0.1"
-  testCompile "org.robolectric:shadows-support-v4:3.3.1"
-  testCompile "org.khronos:opengl-api:gl1.1-android-2.1_r1"
+  testImplementation "org.robospock:robospock:1.0.1"
+  testImplementation "org.robolectric:shadows-support-v4:3.3.1"
+  testImplementation "org.khronos:opengl-api:gl1.1-android-2.1_r1"
 }
